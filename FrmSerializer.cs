@@ -23,7 +23,6 @@ namespace cSharpSerializer
 
         private void FrmSerializer_Load(object sender, EventArgs e)
         {
-
             if (!Sport.Contains("Football")) { sportList.Add(new Sport("Football", true, 'M')); }
             if (!Sport.Contains("Soccer")) { sportList.Add(new Sport("Soccer", true, 'B')); }
             if (!Sport.Contains("Tennis")) { sportList.Add(new Sport("Tennis", true, 'B')); }
@@ -32,17 +31,20 @@ namespace cSharpSerializer
             if (!Sport.Contains("Softball")) { sportList.Add(new Sport("Softball", true, 'F')); }
             if (!Sport.Contains("Bowling")) { sportList.Add(new Sport("Bowling", false, 'B')); }
 
-
-   
         }
 
-        private void BtnSerialize_Click(object sender, EventArgs e)
+        private void BtnSerializeSport_Click(object sender, EventArgs e)
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(List<Sport>));
-            StreamWriter writer = new StreamWriter("sportXML.xml");
-            serializer.Serialize(writer, sportList);
-            writer.Close();
-                    
+            SerializeObject("sportXML.xml", sportList, typeof(List<Sport>));
+        }
+
+        private void SerializeObject(string filename, object data, Type type)
+        {
+            using (StreamWriter writer = new StreamWriter(filename))
+            {
+                XmlSerializer serializer = new XmlSerializer(type);
+                serializer.Serialize(writer, data);
+            }
         }
     }
 }
