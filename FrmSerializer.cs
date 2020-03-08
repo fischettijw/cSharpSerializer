@@ -35,5 +35,17 @@ namespace cSharpSerializer
 
    
         }
+
+        private void BtnSerialize_Click(object sender, EventArgs e)
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(List<Sport>));
+            StreamWriter writer = new StreamWriter("sportXML.xml");
+            serializer.Serialize(writer, sportList);
+            writer.Close();
+                    
+        }
     }
 }
+
+//https://www.youtube.com/watch?v=ecvunlsNm9k
+//How To Use The XML Serializer & Deserializer in .NET (C#)

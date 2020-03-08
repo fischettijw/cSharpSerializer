@@ -16,6 +16,10 @@ namespace cSharpSerializer
         public bool Outdoor { get; set; }
         public char Sex { get; set; }
 
+        public Sport()
+        {
+
+        }
         public Sport(string name, bool outdoor, char sex)
         {
             if (Contains(name)) { return; };
